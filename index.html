@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href=".\node_modules\materialize-css\dist\css\materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="./index.js"></script>
+    <title>Email Spammer</title>
+</head>
+
+<body>
+    <script type="text/javascript" src=".\node_modules\jquery\dist\jquery.min.js"></script>
+    <script type="text/javascript" src=".\node_modules\hammerjs\hammer.min.js"></script>
+    <script type="text/javascript" src=".\node_modules\materialize-css\dist\js\materialize.min.js"></script>
+
+    <div class="row">
+        <form class="col s12">
+            <h3>Sender data</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">email</i>
+                    <input id="emailSender" type="email" class="validate">
+                    <label for="emailSender" data-error="wrong" data-success="right">Email of the sender</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">lock</i>
+                    <input id="passwordSender" type="password" class="validate">
+                    <label for="passwordSender">Password of the sender</label>
+                </div>
+            </div>
+        </form>
+        <form class="col s12">
+            <h3>Reciever data</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">email</i>
+                    <input id="emailTarget" type="email" class="validate">
+                    <label for="emailTarget" data-error="wrong" data-success="right">Target email</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">subject</i>
+                    <input id="subjectTarget" type="text" class="validate">
+                    <label for="subjectTarget">Subject</label>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">mode_edit</i>
+                            <textarea id="contentTarget" class="materialize-textarea"></textarea>
+                            <label for="contentTarget">Text to be sent to the target</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <form class="col s12 range-field">
+                    <input type="range" id="interval" min="60" max="86400" />
+                </form>
+            </div>
+
+            <div class="row">
+                <button class="btn-large waves-effect waves-light col s12" type="submit" name="action" id="send">Send
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Beware</h5>
+                    <p class="grey-text text-lighten-4">I do not take any responsibility for the spam sent from this app.<br>I'm just here to give the tool.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="https://github.com/clitcancer">Github</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="https://electronjs.org/">Electron</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Powered by ©Electron with the style of Materialize (2018 Marcin 'Clitcancer' Wojnarowski)
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

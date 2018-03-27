@@ -1,0 +1,12 @@
+{
+  "name": "emailspammer",
+  "version": "1.0.0",
+  "description": "enter your mail, and spam onto someones account",
+  "main": "starter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Marcin Wojnarowski",
+  "license": "ISC"
+}
