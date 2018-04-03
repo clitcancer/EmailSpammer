@@ -26,6 +26,10 @@ let data = {
 	interval: {
 		path: '#interval',
 		value: ''
+	},
+	filePath: {
+		path: '#filePath',
+		value: ''
 	}
 }
 
@@ -34,6 +38,29 @@ window.addEventListener('load', (e) => {
 	// set defaults and do fake binding values with object
 	for (let prop in data) {
 		let curr = document.querySelector(data[prop].path)
+
+		// file dialog
+		if(curr instanceof HTMLAnchorElement ) {
+			const {dialog} = require('electron').remote;
+			
+			curr.addEventListener('click', function (evt) {
+				dialog.showOpenDialog((fileNames) => {
+					if(fileNames === undefined){
+						window.alert('No file selected.')
+						return
+					} else if (fileNames.length > 1) {
+						window.alert('More than one file selected.')
+						return
+					} else if (fileNames[0].substring(fileNames[0].length - 3) != 'txt') {
+						window.alert('Not a txt file.')
+						return
+					}
+					data[prop].value = fileNames[0]
+					this.innerHTML = fileNames[0]
+				});
+			});
+			continue
+		}
 
 		data[prop].value = curr.value
 		curr.addEventListener('input', function (evt) {
@@ -70,8 +97,6 @@ window.addEventListener('load', (e) => {
 				win.focus();
 				win.webContents.send('data', JSON.stringify(data))
 			});
-
-			win.webContents.openDevTools()
 
 		} else {
 			alert('aborted')
