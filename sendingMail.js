@@ -19,14 +19,12 @@ function p5Sketch(p) {
 	let messageNode = document.querySelector('#msg')
 
 	p.preload = function preload() {
-		console.log('cock')
 		falling.image = p.loadImage('./assets/poopEnvelope.jpg')
 		entryBox.down = p.loadImage('./assets/downerPart.png')
 		entryBox.up = p.loadImage('./assets/upperPart.png')
 	}
 
 	p.setup = function setup() {
-		console.log('cock')
 		p.createCanvas(data.browser.width, data.browser.height)
 		p.imageMode(p.CENTER)
 		startTime = p.millis()
@@ -65,11 +63,26 @@ getData.on('data', (event, items) => {
 	// get data from previous window
 	data = JSON.parse(items)
 	data.mailsSent = 0
+	data.mailText = []
 
 	// create a new p5 sketch instance
 	let sketch = new p5(p5Sketch, 'myCanvas')
 
+	// if file was chosen, send lines instead of text from textarea
+	if(data.filePath.value) {
 
+		let lineReader = require('readline').createInterface({
+			input: require('fs').createReadStream(data.filePath.value)
+		});
+	
+		lineReader.on('line', function (line) {
+			data.mailText.push(line)
+		});
+	} else {
+		data.mailText.push(data.content.value)
+	}
+
+	// interval for sending mails
 	setInterval(() => {
 		let transporter = nodeMail.createTransport({
 			service: 'gmail',
@@ -83,7 +96,7 @@ getData.on('data', (event, items) => {
 			from: data.sender.value,
 			to: data.reciever.value,
 			subject: data.subject.value,
-			text: data.content.value
+			text: data.mailText[data.mailsSent % data.mailText.length]
 		};
 
 		transporter.sendMail(mailOptions, (error, info) => {
@@ -99,7 +112,6 @@ getData.on('data', (event, items) => {
 				}
 			} else {
 				data.mailsSent++
-				//alert(`message sent successfully in ${info.messageTime / 1000}s`)
 			}
 		});
 	}, data.interval.value * 1000)
