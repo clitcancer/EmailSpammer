@@ -8,5 +8,10 @@
     "start": "electron ."
   },
   "author": "Marcin Wojnarowski",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^2.0.2",
+    "materialize-css": "^0.100.2",
+    "nodemailer": "^4.6.5"
+  }
 }
